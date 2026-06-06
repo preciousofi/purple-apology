@@ -6,56 +6,40 @@
 <title>A Letter From My Heart 💜</title>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
-
 *{
     margin:0;
     padding:0;
     box-sizing:border-box;
-    font-family:'Poppins',sans-serif;
-}
-
-html{
-    scroll-behavior:smooth;
+    font-family:'Segoe UI',sans-serif;
 }
 
 body{
-    min-height:100vh;
-    background:linear-gradient(135deg,#12001f,#2a0a45,#4b1877,#6b21a8);
+    background:linear-gradient(135deg,#14001f,#2d0b45,#4a1470);
     color:white;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    padding:20px;
-    overflow-y:auto;
+    min-height:100vh;
+    overflow-x:hidden;
 }
 
-/* 🌧️ REAL RAIN */
 #rain{
     position:fixed;
     inset:0;
-    z-index:1;
     pointer-events:none;
-    overflow:hidden;
+    z-index:1;
 }
 
 .drop{
     position:absolute;
-    bottom:100%;
     width:1px;
     height:80px;
-    background:linear-gradient(transparent,rgba(255,255,255,0.7));
+    background:linear-gradient(transparent,rgba(255,255,255,.7));
     animation:fall linear infinite;
-    opacity:0.5;
 }
 
 @keyframes fall{
-    to{
-        transform:translateY(120vh);
-    }
+    from{transform:translateY(-100px);}
+    to{transform:translateY(120vh);}
 }
 
-/* ⚡ FLASH */
 .flash{
     position:fixed;
     inset:0;
@@ -63,277 +47,210 @@ body{
     opacity:0;
     pointer-events:none;
     z-index:2;
+    transition:.2s;
 }
 
-/* 💜 MAIN CARD */
 .container{
-    width:100%;
-    max-width:900px;
-    background:rgba(255,255,255,0.08);
-    backdrop-filter:blur(14px);
-    border:1px solid rgba(255,255,255,0.15);
-    border-radius:25px;
-    padding:40px;
-    z-index:3;
     position:relative;
-    box-shadow:0 20px 60px rgba(0,0,0,0.3);
-    margin:40px 0;
+    z-index:3;
+    max-width:850px;
+    margin:auto;
+    padding:40px 20px;
 }
 
-h1{
+.hero{
     text-align:center;
-    color:#e9ccff;
-    margin-bottom:25px;
+    margin-bottom:40px;
 }
 
-/* TEXT */
-.message{
-    white-space:pre-wrap;
-    line-height:2;
-    font-size:1rem;
-    min-height:420px;
-}
-
-.cursor{
-    display:inline-block;
-    width:2px;
-    background:white;
-    animation:blink .8s infinite;
-}
-
-@keyframes blink{
-    50%{opacity:0;}
-}
-
-/* FOOTER */
-.footer{
-    margin-top:25px;
-    text-align:center;
+.hero h1{
     color:#f0d9ff;
-    font-style:italic;
+    margin-bottom:10px;
 }
 
-/* HEARTS */
-.heart{
-    position:fixed;
-    color:#c084fc;
-    animation:floatUp 10s linear forwards;
-    pointer-events:none;
+.hero p{
+    color:#d8b4fe;
 }
 
-@keyframes floatUp{
-    from{
-        transform:translateY(100vh);
-        opacity:0;
-    }
-    20%{opacity:.7;}
-    to{
-        transform:translateY(-120px);
-        opacity:0;
-    }
-}
-
-/* CLOSING */
-.closing{
-    position:fixed;
-    inset:0;
-    background:rgba(0,0,0,0.75);
-    display:none;
-    justify-content:center;
-    align-items:center;
-    z-index:999;
-    padding:20px;
-}
-
-.closing-card{
-    background:rgba(255,255,255,0.1);
-    backdrop-filter:blur(14px);
-    border:1px solid rgba(255,255,255,0.2);
-    padding:30px;
+.card{
+    background:rgba(255,255,255,.08);
+    backdrop-filter:blur(12px);
+    border:1px solid rgba(255,255,255,.15);
     border-radius:20px;
-    max-width:500px;
-    text-align:center;
+    padding:25px;
+    margin-bottom:25px;
+    line-height:1.9;
+
+    opacity:0;
+    transform:translateY(40px);
+    transition:all 1s ease;
 }
 
-.closing-card h2{
-    color:#e6ccff;
+.card.show{
+    opacity:1;
+    transform:translateY(0);
+}
+
+.card h2{
+    color:#f0d9ff;
     margin-bottom:15px;
 }
 
-.closing-card p{
-    margin-bottom:10px;
-    line-height:1.7;
-}
-
-.soft{
-    font-style:italic;
-    color:#f0d9ff;
-}
-
-button{
-    margin-top:15px;
-    padding:10px 20px;
-    border:none;
-    border-radius:10px;
-    background:#a855f7;
-    color:white;
-    cursor:pointer;
+.footer{
+    text-align:center;
+    margin-top:40px;
+    color:#d8b4fe;
+    padding-bottom:50px;
 }
 </style>
 </head>
-
 <body>
 
-<!-- 🌧️ RAIN -->
 <div id="rain"></div>
-
-<!-- ⚡ THUNDER -->
-<div class="flash" id="flash"></div>
+<div id="flash" class="flash"></div>
 
 <div class="container">
+
+<div class="hero">
     <h1>💜 A Letter From My Heart 💜</h1>
-
-    <div class="message">
-        <span id="typed"></span><span class="cursor"></span>
-    </div>
-
-    <div class="footer">
-        Purple always reminds me of you. 💜
-    </div>
+    <p>There are some things I needed to say.</p>
 </div>
 
-<!-- 💌 CLOSING -->
-<div id="closingScreen" class="closing">
-  <div class="closing-card">
-    <h2>💜 That’s all I wanted to say</h2>
+<div class="card">
+    <h2>I'm Sorry</h2>
+    <p>
+    I know you may not want to hear from me, and I want to respect your space.
 
-    <p>I don’t expect a reply, and I respect your space.</p>
+    But I've been doing a lot of reflecting, and I felt I needed to reach out and tell you how deeply sorry I am.
 
-    <p>If you ever feel comfortable speaking again, even just as friends, I’d really appreciate it.</p>
+    I know I hurt you.
 
-    <p class="soft">No pressure at all. Take care of yourself.</p>
+    I know I messed up something really special.
 
-    <button onclick="closeScreen()">Close</button>
-  </div>
+    And for that, I'm genuinely sorry.
+    </p>
 </div>
 
+<div class="card">
+    <h2>What I've Been Thinking About</h2>
+    <p>
+    I've spent a lot of time thinking about everything.
+
+    Thinking about what happened.
+
+    Thinking about the mistakes I made.
+
+    Thinking about how much I took for granted.
+
+    I've missed you.
+    </p>
+</div>
+
+<div class="card">
+    <h2>💜 The Memories I Still Carry</h2>
+    <p>
+    I remember our first cinema date.
+
+    I remember you holding my hand because the movie got emotional.
+
+    I remember our second date and how comfortable everything felt.
+
+    I remember listening to your rants about your day and the little things that mattered to you.
+
+    I remember the laughter, the conversations, and the love we shared.
+
+    I miss it all.
+    </p>
+</div>
+
+<div class="card">
+    <h2>What I Regret</h2>
+    <p>
+    I regret hurting someone I cared deeply about.
+
+    I regret ruining something that meant so much to me.
+
+    If I could undo those mistakes, I would.
+
+    Unfortunately, I can't change the past.
+    </p>
+</div>
+
+<div class="card">
+    <h2>The Future</h2>
+    <p>
+    I'm not asking for everything to be the same.
+
+    I know trust takes time.
+
+    I know healing takes time.
+
+    But if life ever gives me the opportunity, I would love the chance to show growth through my actions.
+    </p>
+</div>
+
+<div class="card">
+    <h2>One Last Thing</h2>
+    <p>
+    If you're ever comfortable with it, I'd love for us to be on good terms again.
+
+    Maybe even friends.
+
+    No pressure to reply.
+
+    I just wanted you to know how I truly feel.
+
+    Take care of yourself.
+
+    💜
+    </p>
+</div>
+
+<div class="footer">
+    Purple will always remind me of you. 💜
+</div>
+</div>
 <script>
 
-/* 📜 LETTER */
-const text = `I know you may not want to hear from me, and I want to respect your space.
+/* Rain */
+const rain = document.getElementById("rain");
 
-But I've been doing a lot of reflecting, and I felt I needed to reach out and tell you how deeply sorry I am.
+for(let i=0;i<120;i++){
+    const drop=document.createElement("div");
+    drop.classList.add("drop");
+    drop.style.left=Math.random()*100+"vw";
+    drop.style.opacity=Math.random();
+    drop.style.animationDuration=(0.6+Math.random())+"s";
+    rain.appendChild(drop);
+}
 
-I know I messed up something really special.
+/* Thunder */
+setInterval(()=>{
+    if(Math.random()>0.9){
+        const flash=document.getElementById("flash");
+        flash.style.opacity="0.3";
 
-Looking back, I realize that some of my actions were thoughtless, and I hate knowing that I caused you pain.
+        setTimeout(()=>{
+            flash.style.opacity="0";
+        },150);
+    }
+},5000);
 
-I've missed you, and I've been struggling with the distance between us.
+/* Auto reveal cards */
+const cards=document.querySelectorAll(".card");
 
-I still care about you deeply, but more than anything, I want to become better.
+cards.forEach((card,index)=>{
+    setTimeout(()=>{
+        card.classList.add("show");
 
-I’m not asking for everything to be the same.
-
-I just wanted to say I’m sorry.
-
-If you ever feel like talking again, even just as friends, I’d appreciate it.
-
-Take care. 💜`;
-
-let i = 0;
-const speed = 28;
-
-/* TYPE + AUTO SCROLL */
-function typeWriter(){
-    if(i < text.length){
-        document.getElementById("typed").innerHTML += text.charAt(i);
-        i++;
-
-        window.scrollTo({
-            top: document.body.scrollHeight,
-            behavior: "smooth"
+        card.scrollIntoView({
+            behavior:"smooth",
+            block:"center"
         });
 
-        setTimeout(typeWriter, speed);
-    } else {
-        setTimeout(showClosing, 1200);
-    }
-}
-
-/* CLOSING */
-function showClosing(){
-    document.getElementById("closingScreen").style.display = "flex";
-}
-
-function closeScreen(){
-    document.getElementById("closingScreen").style.display = "none";
-}
-
-/* 🎵 MUSIC (starts immediately on first click) */
-let audio = new Audio("river.mp3");
-audio.loop = true;
-audio.volume = 0.25;
-
-function startMusic(){
-    audio.play().catch(()=>{});
-}
-
-/* starts instantly on first interaction anywhere */
-document.addEventListener("click", function initMusic(){
-    startMusic();
-    document.removeEventListener("click", initMusic);
+    },1800*(index+1));
 });
 
-/* 🌧️ REAL RAIN */
-function createRain(){
-    const rain = document.getElementById("rain");
-
-    for(let i = 0; i < 120; i++){
-        let drop = document.createElement("div");
-        drop.classList.add("drop");
-
-        drop.style.left = Math.random() * 100 + "vw";
-        drop.style.animationDuration = (0.5 + Math.random()) + "s";
-        drop.style.opacity = Math.random();
-
-        rain.appendChild(drop);
-    }
-}
-
-createRain();
-
-/* ⚡ THUNDER */
-function thunder(){
-    const flash = document.getElementById("flash");
-
-    setInterval(()=>{
-        if(Math.random() > 0.92){
-            flash.style.opacity = "0.35";
-            setTimeout(()=>flash.style.opacity = "0", 120);
-        }
-    },4000);
-}
-
-thunder();
-
-/* 🚀 START */
-typeWriter();
-
-/* 💜 HEARTS */
-function createHeart(){
-    const heart = document.createElement("div");
-    heart.innerHTML = "💜";
-    heart.classList.add("heart");
-    heart.style.left = Math.random()*100 + "vw";
-    heart.style.fontSize = (14 + Math.random()*20) + "px";
-
-    document.body.appendChild(heart);
-    setTimeout(()=>heart.remove(),10000);
-}
-
-setInterval(createHeart,900);
-
 </script>
-
 </body>
 </html>
