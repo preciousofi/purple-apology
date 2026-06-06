@@ -9,21 +9,58 @@
     margin:0;
     padding:0;
     box-sizing:border-box;
-    font-family:Segoe UI, sans-serif;
+    font-family:'Segoe UI', sans-serif;
 }
+
 body{
-    min-height:100vh;
-    background:linear-gradient(135deg,#120018,#2a0a3d,#4b1570);
+    background:black;
     color:white;
     overflow:hidden;
 }
+
+/* Intro */
+#intro{
+    position:fixed;
+    inset:0;
+    background:black;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    z-index:10;
+}
+
+.intro-text{
+    font-size:18px;
+    color:#d8b4fe;
+    opacity:0;
+    animation:fadeIn 3s forwards;
+}
+
+.title{
+    font-size:26px;
+    color:#f0d9ff;
+    margin-top:20px;
+    opacity:0;
+    animation:fadeIn 3s forwards;
+    animation-delay:2.5s;
+}
+
+@keyframes fadeIn{
+    to{opacity:1;}
+}
+
 /* Rain */
 #rain{
     position:fixed;
     inset:0;
     pointer-events:none;
     z-index:1;
+    opacity:0;
+    transition:2s;
 }
+
 .drop{
     position:absolute;
     width:1px;
@@ -31,11 +68,13 @@ body{
     background:linear-gradient(transparent,rgba(255,255,255,.7));
     animation:fall linear infinite;
 }
+
 @keyframes fall{
     from{transform:translateY(-100px);}
     to{transform:translateY(120vh);}
 }
-/* Thunder flash */
+
+/* Flash */
 .flash{
     position:fixed;
     inset:0;
@@ -45,187 +84,158 @@ body{
     z-index:2;
     transition:.15s;
 }
-/* Layout */
-.container{
+
+/* Letter */
+#container{
     position:relative;
-    z-index:3;
-    height:100vh;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    padding:20px;
-}
-.card{
-    width:100%;
-    max-width:750px;
-    background:rgba(255,255,255,0.08);
-    backdrop-filter:blur(12px);
-    border:1px solid rgba(255,255,255,0.15);
-    border-radius:20px;
-    padding:30px;
-    line-height:1.9;
+    z-index:5;
+    max-width:800px;
+    margin:auto;
+    padding:50px 20px;
     display:none;
 }
-.card.active{
-    display:block;
-    animation:fadeIn 0.8s ease;
-}
-@keyframes fadeIn{
-    from{opacity:0; transform:translateY(20px);}
-    to{opacity:1; transform:translateY(0);}
-}
-h2{
-    color:#f0d9ff;
-    margin-bottom:15px;
-}
-button{
-    margin-top:20px;
-    padding:12px 20px;
-    border:none;
-    border-radius:10px;
-    background:#d8b4fe;
-    color:#1a001f;
-    font-weight:bold;
-    cursor:pointer;
-}
-button:hover{
-    background:#e9ccff;
-}
-.footer{
+
+h1{
     text-align:center;
-    margin-top:20px;
-    font-size:14px;
+    color:#f0d9ff;
+    margin-bottom:30px;
+}
+
+#text{
+    white-space:pre-wrap;
+    font-size:17px;
+    line-height:1.9;
+}
+
+.footer{
+    margin-top:40px;
+    text-align:center;
     color:#d8b4fe;
 }
 </style>
 </head>
 <body>
+<!-- INTRO -->
+<div id="intro">
+    <div class="intro-text">A message she was never supposed to see...</div>
+    <div class="title">💜 A Letter From My Heart 💜</div>
+</div>
 <div id="rain"></div>
 <div id="flash" class="flash"></div>
-<div class="container">
-<!-- PAGE 1 -->
-<div class="card active" id="page1">
-<h2>I'm Sorry</h2>
-<p>
+<!-- LETTER -->
+<div id="container">
+    <h1>💜 A Letter From My Heart 💜</h1>
+    <div id="text"></div>
+    <div class="footer" id="footer"></div>
+</div>
+<script>
+
+/* INTRO TIMING */
+setTimeout(()=>{
+    document.getElementById("intro").style.transition="2s";
+    document.getElementById("intro").style.opacity="0";
+
+    setTimeout(()=>{
+        document.getElementById("intro").style.display="none";
+        startScene();
+    },2000);
+
+},6000);
+
+/* RAIN */
+function startRain(){
+    const rain=document.getElementById("rain");
+    rain.style.opacity="1";
+
+    for(let i=0;i<120;i++){
+        const drop=document.createElement("div");
+        drop.classList.add("drop");
+        drop.style.left=Math.random()*100+"vw";
+        drop.style.opacity=Math.random();
+        drop.style.animationDuration=(0.6+Math.random())+"s";
+        rain.appendChild(drop);
+    }
+
+    setInterval(()=>{
+        if(Math.random()>0.9){
+            const flash=document.getElementById("flash");
+            flash.style.opacity="0.3";
+            setTimeout(()=>flash.style.opacity="0",150);
+        }
+    },4000);
+}
+
+/* FULL LETTER (NO SECTIONS — ONE FLOW) */
+const text = `
 I know you may not want to hear from me, and I want to respect your space.
 
-But I’ve been doing a lot of reflecting, and I needed to tell you how deeply sorry I am.
+But I’ve been doing a lot of reflecting, and I needed to reach out and tell you how deeply sorry I am.
 
-I know I hurt you.
+I know I hurt you. I know my actions were thoughtless, and I hate that I became the reason for your pain.
 
-I know I messed up something really special.
+I truly didn’t intend for things to turn out this way, but I understand that doesn’t change the impact.
 
-I take full responsibility for that.
+I know I messed up something really special… someone I love… and I take full responsibility for that.
 
-I never intended for things to end up this way, but I understand that doesn’t change anything.
+I’ve been thinking a lot about everything. About what I did wrong. About how I made you feel. About what I should have done better.
 
-</p>
+I miss you. Not just the idea of you — but you.
 
-Continue 💜
+I remember our first cinema date. You holding my hand because the movie got emotional. It was such a small moment, but it stayed with me.
 
-</div>
-<!-- PAGE 2 -->
-<div class="card" id="page2">
-<h2>💜 The Memories I Still Carry</h2>
-<p>
-I remember our first cinema date.
+I remember our second date… how natural everything felt, how easy it was to talk to you.
 
-I remember you holding my hand because the movie got emotional.
+I remember you ranting to me about your day — your thoughts, your stress, your happiness. And I genuinely loved listening.
 
-It was such a small moment, but it meant everything to me.
+I remember the laughter, the conversations, and the comfort we shared.
 
-I remember our second date and how comfortable everything felt.
+I miss all of it.
 
-I remember listening to your rants, your stories, your emotions, and the little things that mattered to you.
+I regret ruining something that meant so much to me.
 
-I genuinely loved listening.
+If I could go back and fix my mistakes, I would.
 
-I remember the laughter, the conversations, and the love we shared.
+But I can’t change the past.
 
-I miss it all.
+You are someone I truly love. Someone who meant a lot to me in ways I didn’t even fully understand at the time.
 
-</p>
+You made life feel lighter just by being in it.
 
-Continue 💜
+I’m not asking for everything to go back to how it was.
 
-</div>
-<!-- PAGE 3 -->
-<div class="card" id="page3">
-<h2>What You Mean To Me</h2>
-<p>
-You were not just someone I cared about.
+I know trust takes time. I know healing takes time.
 
-You were someone I trusted.
-
-Someone I looked forward to talking to.
-
-Someone who made life feel lighter.
-
-Losing that made me realize how important you truly were to me.
-
-I know I can’t change the past, but I needed you to know that what we had mattered deeply to me.
-
-</p>
-
-Continue 💜
-
-</div>
-<!-- PAGE 4 -->
-<div class="card" id="page4">
-<h2>One Last Thing</h2>
-<p>
-I'm not asking for everything to go back to how it was.
-
-I know trust takes time.
-
-I know healing takes time.
-
-But if you’re ever comfortable with it, I’d love for us to be on good terms again.
-
-Maybe even friends.
+But if you’re ever comfortable with it, I’d love for us to be on good terms again. Maybe even friends.
 
 No pressure to reply.
 
 I just wanted you to know how I feel.
 
-Take care of yourself.
+Thank you for the memories…
 
-💜
+Purple will always remind me of you 💜
+`;
 
-</p>
-<div class="footer">
-Purple will always remind me of you.
-</div>
-</div>
-</div>
-<script>
-/* Rain */
-const rain = document.getElementById("rain");
-for(let i=0;i<120;i++){
-    const drop = document.createElement("div");
-    drop.classList.add("drop");
-    drop.style.left = Math.random()*100 + "vw";
-    drop.style.opacity = Math.random();
-    drop.style.animationDuration = (0.6 + Math.random()) + "s";
-    rain.appendChild(drop);
+let i=0;
+const speed=22;
+
+function startScene(){
+    document.getElementById("container").style.display="block";
+    startRain();
+    typeWriter();
 }
-/* Thunder */
-setInterval(()=>{
-    if(Math.random() > 0.9){
-        const flash = document.getElementById("flash");
-        flash.style.opacity = "0.3";
-        setTimeout(()=>flash.style.opacity="0",150);
+
+/* TYPING */
+function typeWriter(){
+    if(i < text.length){
+        document.getElementById("text").innerHTML += text.charAt(i);
+        i++;
+        setTimeout(typeWriter, speed);
+    }else{
+        document.getElementById("footer").innerHTML="Take care of yourself 💜";
     }
-},4000);
-/* Page navigation */
-function nextPage(pageNumber){
-    document.querySelectorAll(".card").forEach(c=>{
-        c.classList.remove("active");
-    });
-    const next = document.getElementById("page"+pageNumber);
-    next.classList.add("active");
-    window.scrollTo({top:0, behavior:"smooth"});
 }
+
 </script>
 </body>
 </html>
