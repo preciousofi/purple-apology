@@ -1,32 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>A Letter From My Heart 💜</title>
-
 <style>
 *{
     margin:0;
     padding:0;
     box-sizing:border-box;
-    font-family:'Segoe UI',sans-serif;
+    font-family:Segoe UI, sans-serif;
 }
-
 body{
-    background:linear-gradient(135deg,#14001f,#2d0b45,#4a1470);
-    color:white;
     min-height:100vh;
-    overflow-x:hidden;
+    background:linear-gradient(135deg,#120018,#2a0a3d,#4b1570);
+    color:white;
+    overflow:hidden;
 }
-
+/* Rain */
 #rain{
     position:fixed;
     inset:0;
     pointer-events:none;
     z-index:1;
 }
-
 .drop{
     position:absolute;
     width:1px;
@@ -34,12 +31,11 @@ body{
     background:linear-gradient(transparent,rgba(255,255,255,.7));
     animation:fall linear infinite;
 }
-
 @keyframes fall{
     from{transform:translateY(-100px);}
     to{transform:translateY(120vh);}
 }
-
+/* Thunder flash */
 .flash{
     position:fixed;
     inset:0;
@@ -47,210 +43,189 @@ body{
     opacity:0;
     pointer-events:none;
     z-index:2;
-    transition:.2s;
+    transition:.15s;
 }
-
+/* Layout */
 .container{
     position:relative;
     z-index:3;
-    max-width:850px;
-    margin:auto;
-    padding:40px 20px;
+    height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
 }
-
-.hero{
-    text-align:center;
-    margin-bottom:40px;
-}
-
-.hero h1{
-    color:#f0d9ff;
-    margin-bottom:10px;
-}
-
-.hero p{
-    color:#d8b4fe;
-}
-
 .card{
-    background:rgba(255,255,255,.08);
+    width:100%;
+    max-width:750px;
+    background:rgba(255,255,255,0.08);
     backdrop-filter:blur(12px);
-    border:1px solid rgba(255,255,255,.15);
+    border:1px solid rgba(255,255,255,0.15);
     border-radius:20px;
-    padding:25px;
-    margin-bottom:25px;
+    padding:30px;
     line-height:1.9;
-
-    opacity:0;
-    transform:translateY(40px);
-    transition:all 1s ease;
+    display:none;
 }
-
-.card.show{
-    opacity:1;
-    transform:translateY(0);
+.card.active{
+    display:block;
+    animation:fadeIn 0.8s ease;
 }
-
-.card h2{
+@keyframes fadeIn{
+    from{opacity:0; transform:translateY(20px);}
+    to{opacity:1; transform:translateY(0);}
+}
+h2{
     color:#f0d9ff;
     margin-bottom:15px;
 }
-
+button{
+    margin-top:20px;
+    padding:12px 20px;
+    border:none;
+    border-radius:10px;
+    background:#d8b4fe;
+    color:#1a001f;
+    font-weight:bold;
+    cursor:pointer;
+}
+button:hover{
+    background:#e9ccff;
+}
 .footer{
     text-align:center;
-    margin-top:40px;
+    margin-top:20px;
+    font-size:14px;
     color:#d8b4fe;
-    padding-bottom:50px;
 }
 </style>
 </head>
 <body>
-
 <div id="rain"></div>
 <div id="flash" class="flash"></div>
-
 <div class="container">
+<!-- PAGE 1 -->
+<div class="card active" id="page1">
+<h2>I'm Sorry</h2>
+<p>
+I know you may not want to hear from me, and I want to respect your space.
 
-<div class="hero">
-    <h1>💜 A Letter From My Heart 💜</h1>
-    <p>There are some things I needed to say.</p>
+But I’ve been doing a lot of reflecting, and I needed to tell you how deeply sorry I am.
+
+I know I hurt you.
+
+I know I messed up something really special.
+
+I take full responsibility for that.
+
+I never intended for things to end up this way, but I understand that doesn’t change anything.
+
+</p>
+
+Continue 💜
+
 </div>
+<!-- PAGE 2 -->
+<div class="card" id="page2">
+<h2>💜 The Memories I Still Carry</h2>
+<p>
+I remember our first cinema date.
 
-<div class="card">
-    <h2>I'm Sorry</h2>
-    <p>
-    I know you may not want to hear from me, and I want to respect your space.
+I remember you holding my hand because the movie got emotional.
 
-    But I've been doing a lot of reflecting, and I felt I needed to reach out and tell you how deeply sorry I am.
+It was such a small moment, but it meant everything to me.
 
-    I know I hurt you.
+I remember our second date and how comfortable everything felt.
 
-    I know I messed up something really special.
+I remember listening to your rants, your stories, your emotions, and the little things that mattered to you.
 
-    And for that, I'm genuinely sorry.
-    </p>
+I genuinely loved listening.
+
+I remember the laughter, the conversations, and the love we shared.
+
+I miss it all.
+
+</p>
+
+Continue 💜
+
 </div>
+<!-- PAGE 3 -->
+<div class="card" id="page3">
+<h2>What You Mean To Me</h2>
+<p>
+You were not just someone I cared about.
 
-<div class="card">
-    <h2>What I've Been Thinking About</h2>
-    <p>
-    I've spent a lot of time thinking about everything.
+You were someone I trusted.
 
-    Thinking about what happened.
+Someone I looked forward to talking to.
 
-    Thinking about the mistakes I made.
+Someone who made life feel lighter.
 
-    Thinking about how much I took for granted.
+Losing that made me realize how important you truly were to me.
 
-    I've missed you.
-    </p>
+I know I can’t change the past, but I needed you to know that what we had mattered deeply to me.
+
+</p>
+
+Continue 💜
+
 </div>
+<!-- PAGE 4 -->
+<div class="card" id="page4">
+<h2>One Last Thing</h2>
+<p>
+I'm not asking for everything to go back to how it was.
 
-<div class="card">
-    <h2>💜 The Memories I Still Carry</h2>
-    <p>
-    I remember our first cinema date.
+I know trust takes time.
 
-    I remember you holding my hand because the movie got emotional.
+I know healing takes time.
 
-    I remember our second date and how comfortable everything felt.
+But if you’re ever comfortable with it, I’d love for us to be on good terms again.
 
-    I remember listening to your rants about your day and the little things that mattered to you.
+Maybe even friends.
 
-    I remember the laughter, the conversations, and the love we shared.
+No pressure to reply.
 
-    I miss it all.
-    </p>
-</div>
+I just wanted you to know how I feel.
 
-<div class="card">
-    <h2>What I Regret</h2>
-    <p>
-    I regret hurting someone I cared deeply about.
+Take care of yourself.
 
-    I regret ruining something that meant so much to me.
+💜
 
-    If I could undo those mistakes, I would.
-
-    Unfortunately, I can't change the past.
-    </p>
-</div>
-
-<div class="card">
-    <h2>The Future</h2>
-    <p>
-    I'm not asking for everything to be the same.
-
-    I know trust takes time.
-
-    I know healing takes time.
-
-    But if life ever gives me the opportunity, I would love the chance to show growth through my actions.
-    </p>
-</div>
-
-<div class="card">
-    <h2>One Last Thing</h2>
-    <p>
-    If you're ever comfortable with it, I'd love for us to be on good terms again.
-
-    Maybe even friends.
-
-    No pressure to reply.
-
-    I just wanted you to know how I truly feel.
-
-    Take care of yourself.
-
-    💜
-    </p>
-</div>
-
+</p>
 <div class="footer">
-    Purple will always remind me of you. 💜
+Purple will always remind me of you.
+</div>
 </div>
 </div>
 <script>
-
 /* Rain */
 const rain = document.getElementById("rain");
-
 for(let i=0;i<120;i++){
-    const drop=document.createElement("div");
+    const drop = document.createElement("div");
     drop.classList.add("drop");
-    drop.style.left=Math.random()*100+"vw";
-    drop.style.opacity=Math.random();
-    drop.style.animationDuration=(0.6+Math.random())+"s";
+    drop.style.left = Math.random()*100 + "vw";
+    drop.style.opacity = Math.random();
+    drop.style.animationDuration = (0.6 + Math.random()) + "s";
     rain.appendChild(drop);
 }
-
 /* Thunder */
 setInterval(()=>{
-    if(Math.random()>0.9){
-        const flash=document.getElementById("flash");
-        flash.style.opacity="0.3";
-
-        setTimeout(()=>{
-            flash.style.opacity="0";
-        },150);
+    if(Math.random() > 0.9){
+        const flash = document.getElementById("flash");
+        flash.style.opacity = "0.3";
+        setTimeout(()=>flash.style.opacity="0",150);
     }
-},5000);
-
-/* Auto reveal cards */
-const cards=document.querySelectorAll(".card");
-
-cards.forEach((card,index)=>{
-    setTimeout(()=>{
-        card.classList.add("show");
-
-        card.scrollIntoView({
-            behavior:"smooth",
-            block:"center"
-        });
-
-    },1800*(index+1));
-});
-
+},4000);
+/* Page navigation */
+function nextPage(pageNumber){
+    document.querySelectorAll(".card").forEach(c=>{
+        c.classList.remove("active");
+    });
+    const next = document.getElementById("page"+pageNumber);
+    next.classList.add("active");
+    window.scrollTo({top:0, behavior:"smooth"});
+}
 </script>
 </body>
 </html>
