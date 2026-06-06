@@ -12,16 +12,16 @@
     font-family:'Segoe UI', sans-serif;
 }
 
-    /* IMPORTANT FIX: allow scrolling */
+/* IMPORTANT FIX: allow scrolling */
 body{
-    background:linear-gradient(135deg,#0b0012,#1d0830,#3b0f5c):
+    background:linear-gradient(135deg,#0b0012,#1d0830,#3b0f5c);
     color:white;
-    min-height:100vh
+    min-height:100vh;
     overflow-x:hidden;
-    overflow-y:auto
+    overflow-y:auto;
 }
 
-/* Intro */
+/* INTRO */
 #intro{
     position:fixed;
     inset:0;
@@ -54,7 +54,7 @@ body{
     to{opacity:1;}
 }
 
-/* Rain */
+/* RAIN */
 #rain{
     position:fixed;
     inset:0;
@@ -77,7 +77,7 @@ body{
     to{transform:translateY(120vh);}
 }
 
-/* Flash */
+/* THUNDER */
 .flash{
     position:fixed;
     inset:0;
@@ -88,32 +88,38 @@ body{
     transition:.15s;
 }
 
-/* Letter */
+/* LETTER CONTAINER */
 #container{
     position:relative;
     z-index:5;
     max-width:800px;
     margin:auto;
-    padding:50px 20px;
+    padding:60px 20px;
     display:none;
 }
 
+/* TITLE */
 h1{
     text-align:center;
     color:#f0d9ff;
-    margin-bottom:30px;
+    margin-bottom:40px;
+    letter-spacing:1px;
 }
 
+/* TEXT */
 #text{
     white-space:pre-wrap;
     font-size:17px;
-    line-height:1.9;
+    line-height:2;
+    color:#f5e9ff;
 }
 
+/* FOOTER */
 .footer{
-    margin-top:40px;
+    margin-top:50px;
     text-align:center;
     color:#d8b4fe;
+    font-size:14px;
 }
 </style>
 </head>
@@ -133,7 +139,7 @@ h1{
 </div>
 <script>
 
-/* INTRO TIMING */
+/* INTRO */
 setTimeout(()=>{
     document.getElementById("intro").style.transition="2s";
     document.getElementById("intro").style.opacity="0";
@@ -143,7 +149,7 @@ setTimeout(()=>{
         startScene();
     },2000);
 
-},6000);
+},5500);
 
 /* RAIN */
 function startRain(){
@@ -168,7 +174,7 @@ function startRain(){
     },4000);
 }
 
-/* FULL LETTER (NO SECTIONS — ONE FLOW) */
+/* LETTER TEXT */
 const text = `
 I know you may not want to hear from me, and I want to respect your space.
 
@@ -200,7 +206,7 @@ If I could go back and fix my mistakes, I would.
 
 But I can’t change the past.
 
-You are someone I truly love. Someone who meant a lot to me in ways I didn’t even fully understand at the time.
+You are someone I truly love. Someone who meant a lot to me in ways I didn’t fully understand at the time.
 
 You made life feel lighter just by being in it.
 
@@ -234,7 +240,7 @@ function typeWriter(){
         document.getElementById("text").innerHTML += text.charAt(i);
         i++;
         setTimeout(typeWriter, speed);
-    }else{
+    } else {
         document.getElementById("footer").innerHTML="Take care of yourself 💜";
     }
 }
