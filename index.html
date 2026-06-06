@@ -12,13 +12,11 @@
     font-family:'Segoe UI', sans-serif;
 }
 
-/* IMPORTANT FIX: allow scrolling */
 body{
     background:linear-gradient(135deg,#0b0012,#1d0830,#3b0f5c);
     color:white;
-    min-height:100vh;
     overflow-x:hidden;
-    overflow-y:auto;
+    min-height:100vh;
 }
 
 /* INTRO */
@@ -27,27 +25,28 @@ body{
     inset:0;
     background:black;
     display:flex;
-    flex-direction:column;
     align-items:center;
     justify-content:center;
-    text-align:center;
+    flex-direction:column;
     z-index:10;
+    text-align:center;
+    transition:2s;
 }
 
-.intro-text{
-    font-size:18px;
+#intro h2{
     color:#d8b4fe;
+    font-size:18px;
     opacity:0;
-    animation:fadeIn 3s forwards;
+    animation:fadeIn 2.5s forwards;
 }
 
-.title{
-    font-size:26px;
+#intro h1{
     color:#f0d9ff;
     margin-top:20px;
+    font-size:26px;
     opacity:0;
-    animation:fadeIn 3s forwards;
-    animation-delay:2.5s;
+    animation:fadeIn 2.5s forwards;
+    animation-delay:2s;
 }
 
 @keyframes fadeIn{
@@ -61,7 +60,6 @@ body{
     pointer-events:none;
     z-index:1;
     opacity:0;
-    transition:2s;
 }
 
 .drop{
@@ -77,7 +75,7 @@ body{
     to{transform:translateY(120vh);}
 }
 
-/* THUNDER */
+/* FLASH */
 .flash{
     position:fixed;
     inset:0;
@@ -88,8 +86,8 @@ body{
     transition:.15s;
 }
 
-/* LETTER CONTAINER */
-#container{
+/* LETTER */
+.container{
     position:relative;
     z-index:5;
     max-width:800px;
@@ -98,77 +96,79 @@ body{
     display:none;
 }
 
-/* TITLE */
 h1{
     text-align:center;
     color:#f0d9ff;
-    margin-bottom:40px;
-    letter-spacing:1px;
+    margin-bottom:30px;
 }
 
-/* TEXT */
 #text{
     white-space:pre-wrap;
     font-size:17px;
     line-height:2;
-    color:#f5e9ff;
 }
 
-/* FOOTER */
 .footer{
     margin-top:50px;
     text-align:center;
     color:#d8b4fe;
-    font-size:14px;
+    font-size:15px;
 }
 </style>
 </head>
 <body>
 <!-- INTRO -->
 <div id="intro">
-    <div class="intro-text">A message she was never supposed to see...</div>
-    <div class="title">💜 A Letter From My Heart 💜</div>
+    <h2>A message I should have said earlier...</h2>
+    <h1>💜 A Letter From My Heart 💜</h1>
 </div>
 <div id="rain"></div>
 <div id="flash" class="flash"></div>
 <!-- LETTER -->
-<div id="container">
+<div class="container" id="container">
     <h1>💜 A Letter From My Heart 💜</h1>
     <div id="text"></div>
     <div class="footer" id="footer"></div>
 </div>
 <script>
 
-/* INTRO */
+/* INTRO CONTROL */
 setTimeout(()=>{
-    document.getElementById("intro").style.transition="2s";
-    document.getElementById("intro").style.opacity="0";
+    const intro = document.getElementById("intro");
+    intro.style.opacity = "0";
 
     setTimeout(()=>{
-        document.getElementById("intro").style.display="none";
-        startScene();
+        intro.style.display = "none";
+        start();
     },2000);
 
-},5500);
+},5000);
+
+/* START EVERYTHING */
+function start(){
+    document.getElementById("container").style.display = "block";
+    startRain();
+    typeWriter();
+}
 
 /* RAIN */
 function startRain(){
-    const rain=document.getElementById("rain");
-    rain.style.opacity="1";
+    const rain = document.getElementById("rain");
+    rain.style.opacity = "1";
 
     for(let i=0;i<120;i++){
-        const drop=document.createElement("div");
+        const drop = document.createElement("div");
         drop.classList.add("drop");
-        drop.style.left=Math.random()*100+"vw";
-        drop.style.opacity=Math.random();
-        drop.style.animationDuration=(0.6+Math.random())+"s";
+        drop.style.left = Math.random()*100 + "vw";
+        drop.style.opacity = Math.random();
+        drop.style.animationDuration = (0.6 + Math.random()) + "s";
         rain.appendChild(drop);
     }
 
     setInterval(()=>{
-        if(Math.random()>0.9){
-            const flash=document.getElementById("flash");
-            flash.style.opacity="0.3";
+        if(Math.random() > 0.9){
+            const flash = document.getElementById("flash");
+            flash.style.opacity = "0.3";
             setTimeout(()=>flash.style.opacity="0",150);
         }
     },4000);
@@ -186,19 +186,17 @@ I truly didn’t intend for things to turn out this way, but I understand that d
 
 I know I messed up something really special… someone I love… and I take full responsibility for that.
 
-I’ve been thinking a lot about everything. About what I did wrong. About how I made you feel. About what I should have done better.
+I’ve been thinking a lot about everything. About what I did wrong. About how I made you feel.
 
-I miss you. Not just the idea of you, but you.
+I miss you. Not just the idea of you — but you.
 
-I remember our first cinema date. You holding my hand because the movie got emotional. It was such a small moment, but it stayed with me.
+I remember our first cinema date. You holding my hand because the movie got emotional. It stayed with me.
 
-I remember our second date… how natural everything felt, how easy it was to talk to you.
+I remember our second date… how natural everything felt.
 
-I remember you ranting to me about your day, your thoughts, your stress, your happiness. And I genuinely loved listening.
+I remember you ranting to me about your day — your thoughts, your stress, your happiness. And I genuinely loved listening.
 
 I remember the laughter, the conversations, and the comfort we shared.
-
-I miss all of it.
 
 I regret ruining something that meant so much to me.
 
@@ -206,13 +204,11 @@ If I could go back and fix my mistakes, I would.
 
 But I can’t change the past.
 
-You are someone I truly love. Someone who meant a lot to me in ways I didn’t fully understand at the time.
+You are someone I truly love.
 
-You made life feel lighter just by being in it.
+Someone who meant more to me than I realized at the time.
 
 I’m not asking for everything to go back to how it was.
-
-I know trust takes time. I know healing takes time.
 
 But if you’re ever comfortable with it, I’d love for us to be on good terms again. Maybe even friends.
 
@@ -222,30 +218,22 @@ I just wanted you to know how I feel.
 
 Thank you for the memories…
 
-I'll always love and care about tou, even if we are not the same again.
+I’ll always care about you, even if things are different now.
 `;
 
-let i=0;
-const speed=22;
+let i = 0;
+const speed = 22;
 
-function startScene(){
-    document.getElementById("container").style.display="block";
-    startRain();
-    typeWriter();
-}
-
-/* TYPING */
 function typeWriter(){
     if(i < text.length){
         document.getElementById("text").innerHTML += text.charAt(i);
         i++;
         setTimeout(typeWriter, speed);
     } else {
-        document.getElementById("footer").innerHTML='Take care of yourself 💜;
-        <span style="font-size:15px; opacity:0.9;">
-            Purple will always remind me of you💜
-            </span>
-        ';
+        document.getElementById("footer").innerHTML = `
+        Take care of yourself 💜<br><br>
+        <span style="opacity:0.9;">Purple will always remind me of you 💜</span>
+        `;
     }
 }
 
